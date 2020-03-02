@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Senai.Peoples.WebApi.Domains;
+using Senai.Peoples.WebApi.Enums;
 using Senai.Peoples.WebApi.Interfaces;
 
 namespace Senai.Peoples.WebApi.Repositories
 {
     public class FuncionariosRepository : IFuncionariosRepository
     {
-        private string StringConexao = "Data Source = DESKTOP-MQ316HJ\\SQLEXPRESS; initial catalog = T_Peoples; user Id = sa; pwd=123";
+        private string StringConexao = "Data Source =DEV14\\SQLEXPRESS; initial catalog =T_Peoples; user Id =sa; pwd =sa@132";
 
         public void Atualizar(int Id, FuncionariosDomain funcionarioJSON)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
-                string query = "update  Funcionarios set Nome = @Nome, Sobrenome = @Sobrenome where IdFuncionario = @Id ";
+                string query = "update Funcionarios set Nome = @Nome, Sobrenome = @Sobrenome where IdFuncionario = @Id ";
 
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
@@ -31,7 +32,6 @@ namespace Senai.Peoples.WebApi.Repositories
                     {
                         cmd.Parameters.AddWithValue("@Sobrenome", funcionarioJSON.Sobrenome);
                     }
-
 
                     con.Open();
 
@@ -64,7 +64,8 @@ namespace Senai.Peoples.WebApi.Repositories
 
                             Nome = rdr["Nome"].ToString(),
 
-                            Sobrenome = rdr["Sobrenome"].ToString()
+                            Sobrenome = rdr["Sobrenome"].ToString(),
+
                         };
 
                         return funcionario;
@@ -98,7 +99,8 @@ namespace Senai.Peoples.WebApi.Repositories
 
                             Nome = rdr["Nome"].ToString(),
 
-                            Sobrenome = rdr["Sobrenome"].ToString()
+                            Sobrenome = rdr["Sobrenome"].ToString(),
+
                         };
 
                         return funcionario;
@@ -108,12 +110,93 @@ namespace Senai.Peoples.WebApi.Repositories
             }
         }
 
+        public List<FuncionariosDomain> ListarNomeCompleto()
+        {
+            List<FuncionariosDomain> funcionarios = new List<FuncionariosDomain>();
+
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string querySelectAll = "SELECT IdFuncionario, CONCAT (Nome, ' ', Sobrenome) FROM Funcionarios";
+
+                // Outra forma
+                //string querySelectAll = "SELECT IdFuncionario, Nome, Sobrenome, DataNascimento FROM Funcionarios";
+
+                con.Open();
+
+                SqlDataReader rdr;
+
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                {
+
+                    rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        FuncionariosDomain funcionario = new FuncionariosDomain
+                        {
+                        
+                            IdFuncionario = Convert.ToInt32(rdr["IdFuncionario"]),
+
+                            Nome = rdr[1].ToString(), 
+
+                            // Outra forma
+                            //,Nome = rdr["Nome"].ToString() + ' ' + rdr["Sobrenome"].ToString()
+
+                            // se usar data nascimento
+                            // ,DataNascimento = Convert.ToDateTime(rdr["DataNascimento"])
+                        };
+
+                        funcionarios.Add(funcionario);
+                    }
+                }
+            }
+
+            return funcionarios;
+        }
+
+        public List<FuncionariosDomain> ListarOrdenado(string ordem)
+        {
+            // Cria uma lista funcionarios onde serão armazenados os dados
+            List<FuncionariosDomain> funcionarios = new List<FuncionariosDomain>();
+
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                // Declara a instrução a ser executada
+                string query = $"SELECT IdFuncionario, Nome, Sobrenome from Funcionarios ORDER BY Nome {ordem}";
+
+                con.Open();
+
+                SqlDataReader rdr;
+
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    rdr = cmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    { 
+                        FuncionariosDomain funcionario = new FuncionariosDomain
+                        {
+                            IdFuncionario = Convert.ToInt32(rdr["IdFuncionario"]),
+
+                            Nome = rdr["Nome"].ToString(),
+
+                            Sobrenome = rdr["Sobrenome"].ToString()
+                        };
+
+                        funcionarios.Add(funcionario);
+                    }
+                }
+            }
+
+            return funcionarios;
+        }
+
         public void Cadastrar(FuncionariosDomain funcionarioJSON)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
                 string queryadd = "insert into Funcionarios values(@Nome, @Sobrenome)";
-
+                
                 using (SqlCommand cmd = new SqlCommand(queryadd, con))
                 {
                     cmd.Parameters.AddWithValue("@Nome", funcionarioJSON.Nome);
@@ -169,7 +252,8 @@ namespace Senai.Peoples.WebApi.Repositories
 
                             Nome = rdr["Nome"].ToString(),
 
-                            Sobrenome = rdr["Sobrenome"].ToString()
+                            Sobrenome = rdr["Sobrenome"].ToString(),
+
                         };
 
                         funcionarios.Add(funcionario);
