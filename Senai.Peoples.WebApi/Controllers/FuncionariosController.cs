@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Peoples.WebApi.Domains;
 using Senai.Peoples.WebApi.Interfaces;
@@ -24,8 +25,16 @@ namespace Senai.Peoples.WebApi.Controllers
             _funcionariosRepository = new FuncionariosRepository();
         }
 
-        // GET api/values
+
+        /// <summary>
+        /// Lista todos os Usuarios
+        /// </summary>
+        /// <returns>Retorna uma lista de Usuarios</returns>
+        ///<response code="201">Item criado</response>
+        ///<response code="400">nulo</response>   
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<IEnumerable<FuncionariosDomain>> Get()
         {
             List<FuncionariosDomain> funcionarios = _funcionariosRepository.Listar();

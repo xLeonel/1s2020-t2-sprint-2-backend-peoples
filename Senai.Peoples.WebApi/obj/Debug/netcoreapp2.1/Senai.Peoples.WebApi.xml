@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Senai.Peoples.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Senai.Peoples.WebApi.Controllers.FuncionariosController.Get">
+             <summary>
+             Lista todos os Usuarios
+             </summary>
+             <returns>Retorna uma lista de Usuarios</returns>
+            <response code="201">Item criado</response>
+            <response code="400">nulo</response>   
+        </member>
+    </members>
+</doc>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples-master\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {}
+    "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples-master\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {
+    "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples-master\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
         "projectName": "Senai.Peoples.WebApi",
-        "projectPath": "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples-master\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
+        "projectPath": "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\Senai.Peoples.WebApi.csproj",
         "packagesPath": "C:\\Users\\48171009824\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples-master\\Senai.Peoples.WebApi\\obj\\",
+        "outputPath": "C:\\Users\\48171009824\\Desktop\\1s2020-t2-sprint-2-backend-peoples\\Senai.Peoples.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
