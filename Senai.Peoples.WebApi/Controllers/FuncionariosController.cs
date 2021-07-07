@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Senai.Peoples.WebApi.Domains;
 using Senai.Peoples.WebApi.Interfaces;
@@ -48,25 +47,6 @@ namespace Senai.Peoples.WebApi.Controllers
             FuncionariosDomain funcionarioSelecionado = _funcionariosRepository.BuscarNome(Nome);
 
             return Ok(funcionarioSelecionado);
-        }
-
-        [HttpGet("nomescompletos")]
-        public IActionResult GetFullName()
-        {
-            // Faz a chamada para o método .ListarNomeCompleto            
-            // Retorna a lista e um status code 200 - Ok
-            return Ok(_funcionariosRepository.ListarNomeCompleto());
-        }
-
-        [HttpGet("ordenacao/{ordem}")]
-        public IActionResult GetOrderBy(string ordem)
-        {
-            if (ordem != "asc" && ordem != "desc")
-            {
-                return BadRequest("Não é possível ordenar da maneira solicitada. Por favor, ordene por 'asc' ou 'desc'");
-            }
-
-            return Ok(_funcionariosRepository.ListarOrdenado(ordem));
         }
 
 
